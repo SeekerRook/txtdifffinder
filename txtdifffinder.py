@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 filename2 = "out.txt"
 join = False
 joinl = []
@@ -24,15 +25,21 @@ filename1 = sys.argv[1]
 
 
 #read from file
-file1 = open(filename1,"r")
-lines = file1.readlines()
-
+if os.path.exists(os.path.join(filename1)):
+    file1 = open(filename1,"r")
+    lines = file1.readlines()
+else: 
+    print("Error: invalid file ", filename1)
+    exit()
 if join :
     for filename3 in joinl:
-        file3 = open(filename3,"r")
-        lines3 = file3.readlines()
-        lines += lines3    
-
+        if os.path.exists(os.path.join(filename3)):
+            file3 = open(filename3,"r")
+            lines3 = file3.readlines()
+            lines += lines3    
+        else:
+            print("Error: invalid file ", filename3)
+            exit()
 print ("Calculating.....")
 setofelems = {""}
 for l in lines:
